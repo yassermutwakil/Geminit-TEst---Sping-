@@ -1,0 +1,5 @@
+{
+  "name": "Work&Co Spin to Win",
+  "description": "A fun, interactive spin wheel application for Work&Co where users can spin once a day to win various prizes. Features include user authentication, a weighted prize wheel, a celebratory prize ticket modal with a countdown timer, and confetti animations.",
+  "requestFramePermissions": []
+}
