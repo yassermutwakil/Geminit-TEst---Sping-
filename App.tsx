@@ -2,11 +2,11 @@ import React, { useState, useCallback } from 'react';
 import type { Prize } from './types';
 import { PRIZES } from './constants';
 import LoginScreen from './components/LoginScreen';
-import Wheel from './components/Wheel';
+import CardGame from './components/CardGame';
 import TicketModal from './components/TicketModal';
 import Confetti from './components/Confetti';
 
-type View = 'login' | 'wheel' | 'ticket' | 'alreadySpun';
+type View = 'login' | 'game' | 'ticket' | 'alreadySpun';
 
 const App: React.FC = () => {
   const [view, setView] = useState<View>('login');
@@ -22,11 +22,11 @@ const App: React.FC = () => {
     if (localStorage.getItem(storageKey)) {
       setView('alreadySpun');
     } else {
-      setView('wheel');
+      setView('game');
     }
   }, [email]);
 
-  const handleSpinEnd = (prize: Prize) => {
+  const handlePrizeSelect = (prize: Prize) => {
     const today = getTodayDateString();
     const storageKey = `spin:${email}:${today}`;
     localStorage.setItem(storageKey, 'true');
@@ -53,8 +53,8 @@ const App: React.FC = () => {
           onStart={handleStart}
         />
       )}
-      {view === 'wheel' && (
-        <Wheel prizes={PRIZES} onSpinEnd={handleSpinEnd} />
+      {view === 'game' && (
+        <CardGame prizes={PRIZES} onPrizeSelect={handlePrizeSelect} />
       )}
       {view === 'ticket' && wonPrize && (
         <>
@@ -63,14 +63,14 @@ const App: React.FC = () => {
             name={name} 
             email={email} 
             prize={wonPrize}
-            onSpinAgain={() => setView('alreadySpun')}
+            onPlayAgain={() => setView('alreadySpun')}
           />
         </>
       )}
       {view === 'alreadySpun' && (
         <div className="text-center bg-green-800/50 backdrop-blur-sm p-8 rounded-lg shadow-2xl border border-green-700">
-          <h2 className="text-3xl font-bold text-white mb-4">One Spin Per Day!</h2>
-          <p className="text-xl text-green-200">You've had your spin for today.</p>
+          <h2 className="text-3xl font-bold text-white mb-4">One Chance Per Day!</h2>
+          <p className="text-xl text-green-200">You've played for today.</p>
           <p className="text-md mt-2 text-green-300">Please come back tomorrow for another chance to win.</p>
           <button
             onClick={resetApp}

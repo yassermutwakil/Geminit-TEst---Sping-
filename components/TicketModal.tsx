@@ -8,7 +8,7 @@ interface TicketModalProps {
   name: string;
   email: string;
   prize: Prize;
-  onSpinAgain: () => void;
+  onPlayAgain: () => void;
 }
 
 const useCountdown = (expiryTimestamp: number) => {
@@ -35,7 +35,7 @@ const useCountdown = (expiryTimestamp: number) => {
   return { hours, minutes, seconds, timeLeft };
 };
 
-const TicketModal: React.FC<TicketModalProps> = ({ name, email, prize, onSpinAgain }) => {
+const TicketModal: React.FC<TicketModalProps> = ({ name, email, prize, onPlayAgain }) => {
   const expiryTimestamp = useMemo(() => Date.now() + 48 * 60 * 60 * 1000, []);
   const { hours, minutes, seconds, timeLeft } = useCountdown(expiryTimestamp);
   const ticketRef = useRef<HTMLDivElement>(null);
@@ -125,7 +125,14 @@ const TicketModal: React.FC<TicketModalProps> = ({ name, email, prize, onSpinAga
         </div>
       </div>
       
-      <p className="mt-4 text-green-300 text-lg font-semibold">⏳ Hurry before the offer ends!</p>
+      <div className="mt-4 text-center text-green-200 max-w-sm mx-auto p-2 rounded-lg bg-green-900/50">
+        <p className="font-semibold text-sm mb-2">
+          To redeem your prize, please download this ticket and present it to the cashier at your nearest Work&Co branch. This ticket is valid for one-time use only.
+        </p>
+        <p className="font-semibold text-sm" dir="rtl">
+          للحصول على جائزتك، يرجى تحميل هذه التذكرة وتقديمها للكاشير في أقرب فرع لـ Work&Co. هذه التذكرة صالحة للاستخدام مرة واحدة فقط.
+        </p>
+      </div>
 
       <div className="flex items-center justify-center flex-wrap gap-4 mt-6">
         <button
@@ -143,10 +150,10 @@ const TicketModal: React.FC<TicketModalProps> = ({ name, email, prize, onSpinAga
           Visit wandco.co
         </a>
         <button
-          onClick={onSpinAgain}
+          onClick={onPlayAgain}
           className="bg-yellow-500 text-black font-bold py-3 px-6 rounded-full hover:bg-yellow-400 transition-colors duration-300"
         >
-          Spin Again?
+          Play Again?
         </button>
       </div>
     </div>

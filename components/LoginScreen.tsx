@@ -39,7 +39,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ prizes, name, setName, email,
         
       <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">Work&Co</h1>
       <p className="text-xl md:text-2xl font-semibold text-green-200 mb-6">Saudi National Day Offer</p>
-      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Spin to Win 🎉</h2>
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Pick a Card & Win 🎉</h2>
 
       <div className="w-full max-w-sm space-y-4">
         <input
@@ -64,7 +64,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ prizes, name, setName, email,
         disabled={!canStart}
         className="w-full max-w-sm mt-8 py-3 px-6 bg-white text-green-800 font-bold text-lg rounded-lg transition-all duration-300 ease-in-out disabled:bg-gray-500 disabled:text-gray-300 disabled:cursor-not-allowed hover:enabled:bg-green-100 hover:enabled:scale-105"
       >
-        Start Spinning
+        Let's Play
       </button>
     </div>
   );
