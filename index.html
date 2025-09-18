@@ -72,7 +72,8 @@
   "imports": {
     "react/": "https://aistudiocdn.com/react@^19.1.1/",
     "react": "https://aistudiocdn.com/react@^19.1.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react-dom/client": "https://aistudiocdn.com/react-dom@^19.1.1/client"
   }
 }
 </script>
@@ -85,7 +86,12 @@
     <!-- Add Babel to transpile JSX in the browser for static deployment -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
-    <!-- Change script type to "text/babel" and use a relative path for the app entry point -->
-    <script type="text/babel" data-type="module" src="./index.tsx"></script>
+    <!-- This script tag now correctly tells Babel to transpile both React (JSX) and TypeScript -->
+    <script 
+      type="text/babel" 
+      data-presets="react,typescript" 
+      data-type="module" 
+      src="./index.tsx"
+    ></script>
   </body>
 </html>
