@@ -41,7 +41,9 @@ const TicketModal: React.FC<TicketModalProps> = ({ name, email, prize, onPlayAga
   const ticketRef = useRef<HTMLDivElement>(null);
   
   const today = new Date().toISOString().split('T')[0];
-  const uniquePart = btoa(`${name}|${email}|${today}`).substring(0, 8).toUpperCase();
+  // FIX: Use a robust method to base64-encode unicode strings to prevent errors.
+  const unicodeString = `${name}|${email}|${today}`;
+  const uniquePart = btoa(unescape(encodeURIComponent(unicodeString))).substring(0, 8).toUpperCase();
   const sanitizedName = name.trim().replace(/\s+/g, '');
   const prizeCode = `${prize.codePrefix}-${uniquePart}-${sanitizedName}`;
 
